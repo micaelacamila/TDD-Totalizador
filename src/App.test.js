@@ -20,6 +20,7 @@ function calcularTotal(cantidad, precio, estado=""){
   var total;
   var totalConImpuesto;
   var totalConDescuento;
+  var totalConDescuentoEImpuesto;
   total = cantidad* precio;
   totalConImpuesto = total+total*impuestoEstado
   var descuentoPrecio = 0;
@@ -34,11 +35,14 @@ function calcularTotal(cantidad, precio, estado=""){
     }else if(total >= 30000){
         descuentoPrecio = 0.15;
     }
+  totalConDescuento = total - total * descuentoPrecio
+  totalConDescuentoEImpuesto = totalConDescuento + totalConDescuento*impuestoEstado
   return "El total es: "+total+
           ", el impuesto del estado "+estado+
           " es: "+impuestoEstado+
           ", el precio con impuesto es: "+totalConImpuesto+
-          " y usted tiene un descuento de: "+descuentoPrecio;
+          " y usted tiene un descuento de: "+descuentoPrecio+"."+
+          " El precio final es: "+totalConDescuentoEImpuesto+".";
 }
 //Primer commit, mandamos un precio y una cantidad y calcula el total
 /*describe("calcular", () => {
@@ -59,8 +63,14 @@ function calcularTotal(cantidad, precio, estado=""){
   });
 })*/
 //Cuarto commit, calcular el descuento
-describe("calcular", () => {
+/*describe("calcular", () => {
   it("deberia calcular ", () => {
     expect(calcularTotal(3, 2,"TX")).toEqual("El total es: 6, el impuesto del estado TX es: 0.0625, el precio con impuesto es: 6.375 y usted tiene un descuento de: 0");
+  });
+});*/
+//Quinto commit, calcular el precio total
+describe("calcular", () => {
+  it("deberia calcular ", () => {
+    expect(calcularTotal(3, 2,"TX")).toEqual("El total es: 6, el impuesto del estado TX es: 0.0625, el precio con impuesto es: 6.375 y usted tiene un descuento de: 0. El precio final es: 6.375.");
   });
 });
